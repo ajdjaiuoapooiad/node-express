@@ -74,7 +74,14 @@ app.post('/api/v1/tours',(req,res) => {
 });
 
 
-
+app.patch('/api/v1/tours/:id',(req,res) => {
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour: '<Updated>'
+        }
+    })
+})
 
 
 const port = 3000;
