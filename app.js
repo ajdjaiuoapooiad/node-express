@@ -3,6 +3,9 @@ const app = express();
 const fs = require('fs');
 
 
+// app.use(express.json());
+
+
 // app.get('/',(req,res) => {
 //     res.status(200).send('Hello from the server')
 // })
@@ -18,11 +21,27 @@ const tours = JSON.parse(
 app.get('/api/v1/tours',(req,res) => {
     res.status(200).json({
         status: 'success',
+        results: tours.length,
         data: {
             tours
         }
     });
 });
+
+
+// app.get('/api/v1/tours',(req,res) => {
+//     console.log(req.body);
+//     res.send('Done');
+    
+// });
+
+
+app.get('/api/v1/tours',(req,res) => {
+
+});
+
+
+
 
 
 
