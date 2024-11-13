@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 
-app.use(express.json());
+// app.use(express.json());
 
 
 // app.get('/',(req,res) => {
@@ -24,6 +24,27 @@ app.get('/api/v1/tours',(req,res) => {
         results: tours.length,
         data: {
             tours
+        }
+    });
+});
+
+app.get('/api/v1/tours/:id',(req,res) => {
+    console.log(req.params);
+    const id = req.params.id * 1;
+    const tour = tours.find(el => el.id === id);
+
+
+    if (!tour){
+        return res.status(404).json({
+            status: 'fail',
+            message: 'error'
+        });
+    }
+    
+    res.status(200).json({
+        status: 'success',
+        data: {
+            tour
         }
     });
 });
