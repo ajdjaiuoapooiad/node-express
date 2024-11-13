@@ -1,5 +1,6 @@
 const fs = require('fs');
 const express = require('express');
+const { getAllTours, createTour, getTour, updateTour, deleteTour } = require('../after-section-06/controllers/tourController');
 const app = express();
 
 
@@ -82,6 +83,25 @@ app.patch('/api/v1/tours/:id',(req,res) => {
         }
     })
 })
+
+
+// app.get('/api/v1/tours',getAllTours);
+// app.get('/api/v1/tours/:id',getTour);
+// app.post('/api/v1/tours',createTour);
+// app.patch('/api/v1/tours/:id',updateTours);
+// app.delete('/api/v1/tours/:id',deleteTours);
+
+
+app
+.route('/api/v1/tours')
+.get(getAllTours)
+.post(createTour);
+
+app
+.routes('/api/v1/tours/:id')
+.get(getTour)
+.patch(updateTour)
+.delete(deleteTour);
 
 
 const port = 3000;
