@@ -97,7 +97,7 @@ const createTour = (req,res) => {
 };
 
 
-const updateTours = (req,res) => {
+const updateTour = (req,res) => {
     if (req.params.id * 1 > tours.length){
         return res.status(404).json({
             status: 'fail',
@@ -192,7 +192,7 @@ const createUser = (req,res) => {
 };
 
 
-const updateUsers = (req,res) => {
+const updateUser = (req,res) => {
     if (req.params.id * 1 > tours.length){
         return res.status(404).json({
             status: 'fail',
@@ -235,28 +235,37 @@ const deleteUser = (req,res) => {
 
 // 3) ROUTES
 
-app
-.route('/api/v1/tours')
+const tourRouter = express.Router();
+const userRouter = express.Router();
+
+
+
+tourRouter
+.route('/')
 .get(getAllTours)
 .post(createTour);
 
-app
-.route('/api/v1/tours/:id')
+tourRouter
+.route('/:id')
 .get(getTour)
-.patch(updateTours)
+.patch(updateTour)
 .delete(deleteTour);
 
 // User
-app
-.route('/api/v1/users')
+userRouter
+.route('/')
 .get(getAllUsers)
 .post(createUser);
 
-app
-.route('/api/v1/users/:id')
+userRouter
+.route('/:id')
 .get(getUser)
-.patch(updateUsers)
+.patch(updateUser)
 .delete(deleteUser);
+
+
+app.use('/api/v1/tours',tourRouter);
+app.use('/api/v1/user',userRouter);
 
 
 const port = 3000;
