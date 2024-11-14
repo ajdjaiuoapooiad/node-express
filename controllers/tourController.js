@@ -6,6 +6,21 @@ const tours = JSON.parse(
 )
 
 
+exports.checkID = (req,res,next,val) => {
+    console.log(`Tour id ; ${val}`);
+    
+
+    if (req.params.id * 1 > tours.length){
+        return res.status(404).json({
+            status: 'fail',
+            message: 'error'
+        });
+    }
+    next();
+};
+
+
+
 exports.getAllTours = (req,res) => {
     console.log(req.requestTime);
     
@@ -18,6 +33,8 @@ exports.getAllTours = (req,res) => {
         }
     });
 };
+
+
 
 exports.getTour = (req,res) => {
     console.log(req.params);
@@ -39,6 +56,8 @@ exports.getTour = (req,res) => {
         }
     });
 };
+
+
 
 
 
@@ -65,6 +84,8 @@ exports.createTour = (req,res) => {
 };
 
 
+
+
 exports.updateTour = (req,res) => {
     if (req.params.id * 1 > tours.length){
         return res.status(404).json({
@@ -80,6 +101,8 @@ exports.updateTour = (req,res) => {
         }
     })
 };
+
+
 
 exports.deleteTour = (req,res) => {
     if (req.params.id * 1 > tours.length){
